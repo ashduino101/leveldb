@@ -14,6 +14,17 @@ fn test_write_to_database() {
 }
 
 #[test]
+fn test_write_binary_key() {
+  let tmp = tmpdir("write");
+  let database: leveldb::database::Database<Vec<u8>> = open_database(tmp.path(), true);
+  let write_opts = WriteOptions::new();
+  let result = database.put(write_opts,
+                            vec![1u8, 2, 3, 4],
+                            &[1]);
+  assert!(result.is_ok());
+}
+
+#[test]
 fn test_delete_from_database() {
   let tmp = tmpdir("delete_simple");
   let database = &mut open_database(tmp.path(), true);

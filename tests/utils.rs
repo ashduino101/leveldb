@@ -3,7 +3,7 @@ use leveldb::database::kv::{KV};
 use leveldb::options::{Options,WriteOptions};
 use std::path::Path;
 use tempdir::TempDir;
-use key::Key;
+use leveldb::database::key::Key;
 
 pub fn open_database<K: Key + Ord>(path: &Path, create_if_missing: bool) -> Database<K> {
   let mut opts = Options::new();
